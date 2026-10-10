@@ -50,5 +50,6 @@ JSON. It starts a fresh conversation and its response is never added to the
 selection prompts.
 
 The question is whether the four instructions change the chance of choosing T2.
-There are no empirical results yet. All four conditions may choose T2 every time;
-that would be a useful reason to stop this small task.
+This example is illustrative. See [the original pilot audit](SHIPPING_001_AUDIT.md)
+for the completed run and [the supplied-predictions protocol](PREDICTIONS_PROTOCOL.md)
+for the separate follow-up.

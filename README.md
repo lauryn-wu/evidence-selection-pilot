@@ -8,11 +8,40 @@ instructions after the model has stated the same tentative hypothesis. It includ
 an exact scoring oracle, a separate rule-prediction check, frozen prompts,
 resumable requests, raw responses, and paired analysis.
 
-**Status: implementation and offline validation only. No empirical model results
-are included.** The project tests a candidate effect; it does not assume that
-explanation harms exploration.
+**Status: the first pilot is complete.** Informative choices were 7/24 direct,
+8/24 after a factual summary, 20/24 after deliberation, and 11/24 after explaining
+the initial hypothesis. This does not support the proposed reasoning-harm effect.
+See the [audited results](docs/SHIPPING_001_AUDIT.md), including the separate
+competence content score and the original parser's formatting failures.
 
-## The experiment
+## Current follow-up: supplied predictions
+
+The new `evidence_selection_predictions` package compares **rules only** with
+**the same rules plus a correct table of each test's outcome under each hypothesis**.
+Both conditions request only the chosen test and share an identical saved initial
+guess. The table does not mark the informative test. The original package and
+completed run remain unchanged.
+
+This is a bounded diagnostic with **24 fresh paired cases, 72 planned calls, and
+an 84-attempt cap**. No live results for this follow-up are included. If the supplied
+table produces near-perfect selection, stop expanding the shipping task. Remaining
+errors require an audit, not automatic expansion or a mechanism claim.
+
+Start with the six-call check (two cases), using your terminal's OPENAI_API_KEY:
+
+~~~bash
+python3 -m unittest discover -s tests -v
+python3 -m evidence_selection_predictions prepare --config configs/predictions.json --output runs/predictions-001
+caffeinate -i python3 -m evidence_selection_predictions run --output runs/predictions-001 --max-calls 6
+python3 -m evidence_selection_predictions export --output runs/predictions-001 --destination runs/predictions-check-001.zip
+~~~
+
+After checking the responses, resume without --max-calls and export to a different
+filename. See the [follow-up protocol and full commands](docs/PREDICTIONS_PROTOCOL.md).
+Neither prepare nor export makes model calls. Mock and live runs use separate
+directories. Do not edit source or prompts during collection.
+
+## Original four-condition experiment
 
 A shipping calculator follows exactly one of two possible rules:
 
@@ -155,9 +184,10 @@ named evidence-selection-pilot on GitHub, without an automatically generated
 README, then run these commands from this folder:
 
 ~~~bash
-git init -b main
+git init
 git add .
 git commit -m "Initialize evidence selection pilot"
+git branch -M main
 git remote add origin https://github.com/lauryn-wu/evidence-selection-pilot.git
 git push -u origin main
 ~~~

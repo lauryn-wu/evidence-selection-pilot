@@ -1,0 +1,14 @@
+{
+  "protocol": "evidence-selection-supplied-predictions-v1",
+  "n_worlds": 24,
+  "seed": 202610102,
+  "model": "gpt-4o-2024-08-06",
+  "api_key_env": "OPENAI_API_KEY",
+  "temperature": 0.0,
+  "max_completion_tokens": 1024,
+  "timeout_seconds": 120,
+  "max_total_attempts": 84,
+  "max_attempts_per_job": 2,
+  "bootstrap_samples": 10000,
+  "analysis_seed": 271828
+}

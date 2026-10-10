@@ -1,0 +1,1100 @@
+{
+  "audit_policy": "Separate content audit declared after the six-call smoke check. Remove at most one whole-response Markdown JSON fence; interpret nonnegative plain decimal strings as numbers; require exactly T1/T2/T3 with H1/H2 in each. Reject extra prose, duplicate keys, booleans, nonfinite values, and provider-invalid answers. Never change an original validity flag or replace an answer.",
+  "input": {
+    "filename": "shipping-001.zip",
+    "archive_sha256": "6be41a130b998b73352708cec45d475db5543c9787e7124a38dc8c308852d48d"
+  },
+  "plan_hash": "383bd6d3b8d6fb6154544469c07f9f7989745fb348fc58e03bcca347051e1b97",
+  "source_hash": "4f793f0e95dfb36fc554f85538ee133bcddb691e3a2da5114b0654ef70c0bb48",
+  "is_simulated": false,
+  "returned_answers": 144,
+  "planned_calls": 144,
+  "strict_original_decision": "measurement_issue_review_invalid_outputs",
+  "strict_competence": {
+    "valid_cases": 0,
+    "all_six_correct": 0,
+    "correct_prediction_cells": 0,
+    "planned_prediction_cells": 144
+  },
+  "content_competence": {
+    "planned_cases": 24,
+    "content_valid_cases": 24,
+    "all_six_correct": 23,
+    "correct_prediction_cells": 143,
+    "planned_prediction_cells": 144
+  },
+  "initial_semantic_rules": {
+    "price": 24
+  },
+  "original_selection_conditions": {
+    "direct": {
+      "planned": 24,
+      "returned": 24,
+      "valid": 24,
+      "invalid": 0,
+      "missing": 0,
+      "diagnostic_count": 7,
+      "diagnostic_rate_all_planned": 0.2916666666666667,
+      "diagnostic_rate_valid_only": 0.2916666666666667,
+      "mean_information_bits_valid_only": 0.2916666666666667,
+      "has_prefix_count": 0,
+      "no_prefix_count": 24,
+      "word_budget_met_count": 0,
+      "median_prefix_words": 0.0
+    },
+    "facts": {
+      "planned": 24,
+      "returned": 24,
+      "valid": 24,
+      "invalid": 0,
+      "missing": 0,
+      "diagnostic_count": 8,
+      "diagnostic_rate_all_planned": 0.3333333333333333,
+      "diagnostic_rate_valid_only": 0.3333333333333333,
+      "mean_information_bits_valid_only": 0.3333333333333333,
+      "has_prefix_count": 24,
+      "no_prefix_count": 0,
+      "word_budget_met_count": 23,
+      "median_prefix_words": 92.0
+    },
+    "deliberate": {
+      "planned": 24,
+      "returned": 24,
+      "valid": 24,
+      "invalid": 0,
+      "missing": 0,
+      "diagnostic_count": 20,
+      "diagnostic_rate_all_planned": 0.8333333333333334,
+      "diagnostic_rate_valid_only": 0.8333333333333334,
+      "mean_information_bits_valid_only": 0.8333333333333334,
+      "has_prefix_count": 24,
+      "no_prefix_count": 0,
+      "word_budget_met_count": 7,
+      "median_prefix_words": 102.0
+    },
+    "explain": {
+      "planned": 24,
+      "returned": 24,
+      "valid": 24,
+      "invalid": 0,
+      "missing": 0,
+      "diagnostic_count": 11,
+      "diagnostic_rate_all_planned": 0.4583333333333333,
+      "diagnostic_rate_valid_only": 0.4583333333333333,
+      "mean_information_bits_valid_only": 0.4583333333333333,
+      "has_prefix_count": 24,
+      "no_prefix_count": 0,
+      "word_budget_met_count": 11,
+      "median_prefix_words": 106.0
+    }
+  },
+  "original_paired_comparisons": {
+    "deliberate_minus_facts": {
+      "n_pairs": 24,
+      "difference_pp": 50.0,
+      "bootstrap_interval95_pp": [
+        25.0,
+        70.83333333333334
+      ],
+      "interval_note": "Descriptive case bootstrap; repeated cases share one task template.",
+      "gains": 13,
+      "losses": 1,
+      "mcnemar_exact_p_unadjusted": 0.0018310546875,
+      "competence_correct_subset": {
+        "n_pairs": 0,
+        "difference_pp": null,
+        "note": "Secondary descriptive subset; competence is measured in a separate call."
+      }
+    },
+    "deliberate_minus_direct": {
+      "n_pairs": 24,
+      "difference_pp": 54.166666666666664,
+      "bootstrap_interval95_pp": [
+        29.166666666666668,
+        75.0
+      ],
+      "interval_note": "Descriptive case bootstrap; repeated cases share one task template.",
+      "gains": 14,
+      "losses": 1,
+      "mcnemar_exact_p_unadjusted": 0.0009765625,
+      "competence_correct_subset": {
+        "n_pairs": 0,
+        "difference_pp": null,
+        "note": "Secondary descriptive subset; competence is measured in a separate call."
+      }
+    },
+    "explain_minus_facts": {
+      "n_pairs": 24,
+      "difference_pp": 12.5,
+      "bootstrap_interval95_pp": [
+        -4.166666666666666,
+        29.166666666666668
+      ],
+      "interval_note": "Descriptive case bootstrap; repeated cases share one task template.",
+      "gains": 4,
+      "losses": 1,
+      "mcnemar_exact_p_unadjusted": 0.375,
+      "competence_correct_subset": {
+        "n_pairs": 0,
+        "difference_pp": null,
+        "note": "Secondary descriptive subset; competence is measured in a separate call."
+      }
+    },
+    "explain_minus_deliberate": {
+      "n_pairs": 24,
+      "difference_pp": -37.5,
+      "bootstrap_interval95_pp": [
+        -58.333333333333336,
+        -16.666666666666664
+      ],
+      "interval_note": "Descriptive case bootstrap; repeated cases share one task template.",
+      "gains": 1,
+      "losses": 10,
+      "mcnemar_exact_p_unadjusted": 0.01171875,
+      "competence_correct_subset": {
+        "n_pairs": 0,
+        "difference_pp": null,
+        "note": "Secondary descriptive subset; competence is measured in a separate call."
+      }
+    }
+  },
+  "competence_cases": [
+    {
+      "world_id": "shipping-000",
+      "strict_valid": false,
+      "content_parseable": true,
+      "predictions": {
+        "T1": {
+          "H1": 0.0,
+          "H2": 0.0
+        },
+        "T2": {
+          "H1": 10.0,
+          "H2": 10.0
+        },
+        "T3": {
+          "H1": 10.0,
+          "H2": 0.0
+        }
+      },
+      "removed_fence": true,
+      "numeric_strings_converted": 6,
+      "content_valid": true,
+      "expected": {
+        "T1": {
+          "H1": 0,
+          "H2": 0
+        },
+        "T2": {
+          "H1": 10,
+          "H2": 10
+        },
+        "T3": {
+          "H1": 10,
+          "H2": 0
+        }
+      },
+      "all_six_correct": true,
+      "correct_cells": 6,
+      "text": "```json\n{\n  \"T1\": {\"H1\": \"0\", \"H2\": \"0\"},\n  \"T2\": {\"H1\": \"10\", \"H2\": \"10\"},\n  \"T3\": {\"H1\": \"10\", \"H2\": \"0\"}\n}\n```"
+    },
+    {
+      "world_id": "shipping-001",
+      "strict_valid": false,
+      "content_parseable": true,
+      "predictions": {
+        "T1": {
+          "H1": 6.0,
+          "H2": 6.0
+        },
+        "T2": {
+          "H1": 6.0,
+          "H2": 6.0
+        },
+        "T3": {
+          "H1": 0.0,
+          "H2": 0.0
+        }
+      },
+      "removed_fence": true,
+      "numeric_strings_converted": 6,
+      "content_valid": true,
+      "expected": {
+        "T1": {
+          "H1": 6,
+          "H2": 6
+        },
+        "T2": {
+          "H1": 0,
+          "H2": 6
+        },
+        "T3": {
+          "H1": 0,
+          "H2": 0
+        }
+      },
+      "all_six_correct": false,
+      "correct_cells": 5,
+      "text": "```json\n{\n  \"T1\": {\"H1\": \"6\", \"H2\": \"6\"},\n  \"T2\": {\"H1\": \"6\", \"H2\": \"6\"},\n  \"T3\": {\"H1\": \"0\", \"H2\": \"0\"}\n}\n```"
+    },
+    {
+      "world_id": "shipping-002",
+      "strict_valid": false,
+      "content_parseable": true,
+      "predictions": {
+        "T1": {
+          "H1": 4.0,
+          "H2": 4.0
+        },
+        "T2": {
+          "H1": 0.0,
+          "H2": 0.0
+        },
+        "T3": {
+          "H1": 4.0,
+          "H2": 0.0
+        }
+      },
+      "removed_fence": true,
+      "numeric_strings_converted": 6,
+      "content_valid": true,
+      "expected": {
+        "T1": {
+          "H1": 4,
+          "H2": 4
+        },
+        "T2": {
+          "H1": 0,
+          "H2": 0
+        },
+        "T3": {
+          "H1": 4,
+          "H2": 0
+        }
+      },
+      "all_six_correct": true,
+      "correct_cells": 6,
+      "text": "```json\n{\n  \"T1\": {\"H1\": \"4\", \"H2\": \"4\"},\n  \"T2\": {\"H1\": \"0\", \"H2\": \"0\"},\n  \"T3\": {\"H1\": \"4\", \"H2\": \"0\"}\n}\n```"
+    },
+    {
+      "world_id": "shipping-003",
+      "strict_valid": false,
+      "content_parseable": true,
+      "predictions": {
+        "T1": {
+          "H1": 5.0,
+          "H2": 5.0
+        },
+        "T2": {
+          "H1": 0.0,
+          "H2": 0.0
+        },
+        "T3": {
+          "H1": 0.0,
+          "H2": 5.0
+        }
+      },
+      "removed_fence": true,
+      "numeric_strings_converted": 6,
+      "content_valid": true,
+      "expected": {
+        "T1": {
+          "H1": 5,
+          "H2": 5
+        },
+        "T2": {
+          "H1": 0,
+          "H2": 0
+        },
+        "T3": {
+          "H1": 0,
+          "H2": 5
+        }
+      },
+      "all_six_correct": true,
+      "correct_cells": 6,
+      "text": "```json\n{\n  \"T1\": {\"H1\": \"5\", \"H2\": \"5\"},\n  \"T2\": {\"H1\": \"0\", \"H2\": \"0\"},\n  \"T3\": {\"H1\": \"0\", \"H2\": \"5\"}\n}\n```"
+    },
+    {
+      "world_id": "shipping-004",
+      "strict_valid": false,
+      "content_parseable": true,
+      "predictions": {
+        "T1": {
+          "H1": 0,
+          "H2": 0
+        },
+        "T2": {
+          "H1": 4,
+          "H2": 0
+        },
+        "T3": {
+          "H1": 4,
+          "H2": 4
+        }
+      },
+      "removed_fence": true,
+      "numeric_strings_converted": 0,
+      "content_valid": true,
+      "expected": {
+        "T1": {
+          "H1": 0,
+          "H2": 0
+        },
+        "T2": {
+          "H1": 4,
+          "H2": 0
+        },
+        "T3": {
+          "H1": 4,
+          "H2": 4
+        }
+      },
+      "all_six_correct": true,
+      "correct_cells": 6,
+      "text": "```json\n{\n  \"T1\": {\"H1\": 0, \"H2\": 0},\n  \"T2\": {\"H1\": 4, \"H2\": 0},\n  \"T3\": {\"H1\": 4, \"H2\": 4}\n}\n```"
+    },
+    {
+      "world_id": "shipping-005",
+      "strict_valid": false,
+      "content_parseable": true,
+      "predictions": {
+        "T1": {
+          "H1": 6,
+          "H2": 0
+        },
+        "T2": {
+          "H1": 6,
+          "H2": 6
+        },
+        "T3": {
+          "H1": 0,
+          "H2": 0
+        }
+      },
+      "removed_fence": true,
+      "numeric_strings_converted": 0,
+      "content_valid": true,
+      "expected": {
+        "T1": {
+          "H1": 6,
+          "H2": 0
+        },
+        "T2": {
+          "H1": 6,
+          "H2": 6
+        },
+        "T3": {
+          "H1": 0,
+          "H2": 0
+        }
+      },
+      "all_six_correct": true,
+      "correct_cells": 6,
+      "text": "```json\n{\n  \"T1\": {\"H1\": 6, \"H2\": 0},\n  \"T2\": {\"H1\": 6, \"H2\": 6},\n  \"T3\": {\"H1\": 0, \"H2\": 0}\n}\n```"
+    },
+    {
+      "world_id": "shipping-006",
+      "strict_valid": false,
+      "content_parseable": true,
+      "predictions": {
+        "T1": {
+          "H1": 4,
+          "H2": 4
+        },
+        "T2": {
+          "H1": 0,
+          "H2": 4
+        },
+        "T3": {
+          "H1": 0,
+          "H2": 0
+        }
+      },
+      "removed_fence": true,
+      "numeric_strings_converted": 0,
+      "content_valid": true,
+      "expected": {
+        "T1": {
+          "H1": 4,
+          "H2": 4
+        },
+        "T2": {
+          "H1": 0,
+          "H2": 4
+        },
+        "T3": {
+          "H1": 0,
+          "H2": 0
+        }
+      },
+      "all_six_correct": true,
+      "correct_cells": 6,
+      "text": "```json\n{\n  \"T1\": {\"H1\": 4, \"H2\": 4},\n  \"T2\": {\"H1\": 0, \"H2\": 4},\n  \"T3\": {\"H1\": 0, \"H2\": 0}\n}\n```"
+    },
+    {
+      "world_id": "shipping-007",
+      "strict_valid": false,
+      "content_parseable": true,
+      "predictions": {
+        "T1": {
+          "H1": 0.0,
+          "H2": 0.0
+        },
+        "T2": {
+          "H1": 10.0,
+          "H2": 10.0
+        },
+        "T3": {
+          "H1": 10.0,
+          "H2": 0.0
+        }
+      },
+      "removed_fence": true,
+      "numeric_strings_converted": 6,
+      "content_valid": true,
+      "expected": {
+        "T1": {
+          "H1": 0,
+          "H2": 0
+        },
+        "T2": {
+          "H1": 10,
+          "H2": 10
+        },
+        "T3": {
+          "H1": 10,
+          "H2": 0
+        }
+      },
+      "all_six_correct": true,
+      "correct_cells": 6,
+      "text": "```json\n{\n  \"T1\": {\"H1\": \"0\", \"H2\": \"0\"},\n  \"T2\": {\"H1\": \"10\", \"H2\": \"10\"},\n  \"T3\": {\"H1\": \"10\", \"H2\": \"0\"}\n}\n```"
+    },
+    {
+      "world_id": "shipping-008",
+      "strict_valid": false,
+      "content_parseable": true,
+      "predictions": {
+        "T1": {
+          "H1": 0,
+          "H2": 8
+        },
+        "T2": {
+          "H1": 8,
+          "H2": 8
+        },
+        "T3": {
+          "H1": 0,
+          "H2": 0
+        }
+      },
+      "removed_fence": true,
+      "numeric_strings_converted": 0,
+      "content_valid": true,
+      "expected": {
+        "T1": {
+          "H1": 0,
+          "H2": 8
+        },
+        "T2": {
+          "H1": 8,
+          "H2": 8
+        },
+        "T3": {
+          "H1": 0,
+          "H2": 0
+        }
+      },
+      "all_six_correct": true,
+      "correct_cells": 6,
+      "text": "```json\n{\n  \"T1\": {\"H1\": 0, \"H2\": 8},\n  \"T2\": {\"H1\": 8, \"H2\": 8},\n  \"T3\": {\"H1\": 0, \"H2\": 0}\n}\n```"
+    },
+    {
+      "world_id": "shipping-009",
+      "strict_valid": false,
+      "content_parseable": true,
+      "predictions": {
+        "T1": {
+          "H1": 0.0,
+          "H2": 0.0
+        },
+        "T2": {
+          "H1": 0.0,
+          "H2": 8.0
+        },
+        "T3": {
+          "H1": 8.0,
+          "H2": 8.0
+        }
+      },
+      "removed_fence": true,
+      "numeric_strings_converted": 6,
+      "content_valid": true,
+      "expected": {
+        "T1": {
+          "H1": 0,
+          "H2": 0
+        },
+        "T2": {
+          "H1": 0,
+          "H2": 8
+        },
+        "T3": {
+          "H1": 8,
+          "H2": 8
+        }
+      },
+      "all_six_correct": true,
+      "correct_cells": 6,
+      "text": "```json\n{\n  \"T1\": {\"H1\": \"0\", \"H2\": \"0\"},\n  \"T2\": {\"H1\": \"0\", \"H2\": \"8\"},\n  \"T3\": {\"H1\": \"8\", \"H2\": \"8\"}\n}\n```"
+    },
+    {
+      "world_id": "shipping-010",
+      "strict_valid": false,
+      "content_parseable": true,
+      "predictions": {
+        "T1": {
+          "H1": 0,
+          "H2": 0
+        },
+        "T2": {
+          "H1": 4,
+          "H2": 4
+        },
+        "T3": {
+          "H1": 0,
+          "H2": 4
+        }
+      },
+      "removed_fence": true,
+      "numeric_strings_converted": 0,
+      "content_valid": true,
+      "expected": {
+        "T1": {
+          "H1": 0,
+          "H2": 0
+        },
+        "T2": {
+          "H1": 4,
+          "H2": 4
+        },
+        "T3": {
+          "H1": 0,
+          "H2": 4
+        }
+      },
+      "all_six_correct": true,
+      "correct_cells": 6,
+      "text": "```json\n{\n  \"T1\": {\"H1\": 0, \"H2\": 0},\n  \"T2\": {\"H1\": 4, \"H2\": 4},\n  \"T3\": {\"H1\": 0, \"H2\": 4}\n}\n```"
+    },
+    {
+      "world_id": "shipping-011",
+      "strict_valid": false,
+      "content_parseable": true,
+      "predictions": {
+        "T1": {
+          "H1": 5,
+          "H2": 5
+        },
+        "T2": {
+          "H1": 0,
+          "H2": 0
+        },
+        "T3": {
+          "H1": 5,
+          "H2": 0
+        }
+      },
+      "removed_fence": true,
+      "numeric_strings_converted": 0,
+      "content_valid": true,
+      "expected": {
+        "T1": {
+          "H1": 5,
+          "H2": 5
+        },
+        "T2": {
+          "H1": 0,
+          "H2": 0
+        },
+        "T3": {
+          "H1": 5,
+          "H2": 0
+        }
+      },
+      "all_six_correct": true,
+      "correct_cells": 6,
+      "text": "```json\n{\n  \"T1\": {\"H1\": 5, \"H2\": 5},\n  \"T2\": {\"H1\": 0, \"H2\": 0},\n  \"T3\": {\"H1\": 5, \"H2\": 0}\n}\n```"
+    },
+    {
+      "world_id": "shipping-012",
+      "strict_valid": false,
+      "content_parseable": true,
+      "predictions": {
+        "T1": {
+          "H1": 0,
+          "H2": 6
+        },
+        "T2": {
+          "H1": 6,
+          "H2": 6
+        },
+        "T3": {
+          "H1": 0,
+          "H2": 0
+        }
+      },
+      "removed_fence": true,
+      "numeric_strings_converted": 0,
+      "content_valid": true,
+      "expected": {
+        "T1": {
+          "H1": 0,
+          "H2": 6
+        },
+        "T2": {
+          "H1": 6,
+          "H2": 6
+        },
+        "T3": {
+          "H1": 0,
+          "H2": 0
+        }
+      },
+      "all_six_correct": true,
+      "correct_cells": 6,
+      "text": "```json\n{\n  \"T1\": {\"H1\": 0, \"H2\": 6},\n  \"T2\": {\"H1\": 6, \"H2\": 6},\n  \"T3\": {\"H1\": 0, \"H2\": 0}\n}\n```"
+    },
+    {
+      "world_id": "shipping-013",
+      "strict_valid": false,
+      "content_parseable": true,
+      "predictions": {
+        "T1": {
+          "H1": 6.0,
+          "H2": 6.0
+        },
+        "T2": {
+          "H1": 6.0,
+          "H2": 0.0
+        },
+        "T3": {
+          "H1": 0.0,
+          "H2": 0.0
+        }
+      },
+      "removed_fence": true,
+      "numeric_strings_converted": 6,
+      "content_valid": true,
+      "expected": {
+        "T1": {
+          "H1": 6,
+          "H2": 6
+        },
+        "T2": {
+          "H1": 6,
+          "H2": 0
+        },
+        "T3": {
+          "H1": 0,
+          "H2": 0
+        }
+      },
+      "all_six_correct": true,
+      "correct_cells": 6,
+      "text": "```json\n{\n  \"T1\": {\"H1\": \"6\", \"H2\": \"6\"},\n  \"T2\": {\"H1\": \"6\", \"H2\": \"0\"},\n  \"T3\": {\"H1\": \"0\", \"H2\": \"0\"}\n}\n```"
+    },
+    {
+      "world_id": "shipping-014",
+      "strict_valid": false,
+      "content_parseable": true,
+      "predictions": {
+        "T1": {
+          "H1": 5.0,
+          "H2": 5.0
+        },
+        "T2": {
+          "H1": 0.0,
+          "H2": 0.0
+        },
+        "T3": {
+          "H1": 0.0,
+          "H2": 5.0
+        }
+      },
+      "removed_fence": true,
+      "numeric_strings_converted": 6,
+      "content_valid": true,
+      "expected": {
+        "T1": {
+          "H1": 5,
+          "H2": 5
+        },
+        "T2": {
+          "H1": 0,
+          "H2": 0
+        },
+        "T3": {
+          "H1": 0,
+          "H2": 5
+        }
+      },
+      "all_six_correct": true,
+      "correct_cells": 6,
+      "text": "```json\n{\n  \"T1\": {\"H1\": \"5\", \"H2\": \"5\"},\n  \"T2\": {\"H1\": \"0\", \"H2\": \"0\"},\n  \"T3\": {\"H1\": \"0\", \"H2\": \"5\"}\n}\n```"
+    },
+    {
+      "world_id": "shipping-015",
+      "strict_valid": false,
+      "content_parseable": true,
+      "predictions": {
+        "T1": {
+          "H1": 5.0,
+          "H2": 0.0
+        },
+        "T2": {
+          "H1": 0.0,
+          "H2": 0.0
+        },
+        "T3": {
+          "H1": 5.0,
+          "H2": 5.0
+        }
+      },
+      "removed_fence": true,
+      "numeric_strings_converted": 6,
+      "content_valid": true,
+      "expected": {
+        "T1": {
+          "H1": 5,
+          "H2": 0
+        },
+        "T2": {
+          "H1": 0,
+          "H2": 0
+        },
+        "T3": {
+          "H1": 5,
+          "H2": 5
+        }
+      },
+      "all_six_correct": true,
+      "correct_cells": 6,
+      "text": "```json\n{\n  \"T1\": {\"H1\": \"5\", \"H2\": \"0\"},\n  \"T2\": {\"H1\": \"0\", \"H2\": \"0\"},\n  \"T3\": {\"H1\": \"5\", \"H2\": \"5\"}\n}\n```"
+    },
+    {
+      "world_id": "shipping-016",
+      "strict_valid": false,
+      "content_parseable": true,
+      "predictions": {
+        "T1": {
+          "H1": 0.0,
+          "H2": 0.0
+        },
+        "T2": {
+          "H1": 0.0,
+          "H2": 4.0
+        },
+        "T3": {
+          "H1": 4.0,
+          "H2": 4.0
+        }
+      },
+      "removed_fence": true,
+      "numeric_strings_converted": 6,
+      "content_valid": true,
+      "expected": {
+        "T1": {
+          "H1": 0,
+          "H2": 0
+        },
+        "T2": {
+          "H1": 0,
+          "H2": 4
+        },
+        "T3": {
+          "H1": 4,
+          "H2": 4
+        }
+      },
+      "all_six_correct": true,
+      "correct_cells": 6,
+      "text": "```json\n{\n  \"T1\": {\"H1\": \"0\", \"H2\": \"0\"},\n  \"T2\": {\"H1\": \"0\", \"H2\": \"4\"},\n  \"T3\": {\"H1\": \"4\", \"H2\": \"4\"}\n}\n```"
+    },
+    {
+      "world_id": "shipping-017",
+      "strict_valid": false,
+      "content_parseable": true,
+      "predictions": {
+        "T1": {
+          "H1": 0.0,
+          "H2": 8.0
+        },
+        "T2": {
+          "H1": 0.0,
+          "H2": 0.0
+        },
+        "T3": {
+          "H1": 8.0,
+          "H2": 8.0
+        }
+      },
+      "removed_fence": true,
+      "numeric_strings_converted": 6,
+      "content_valid": true,
+      "expected": {
+        "T1": {
+          "H1": 0,
+          "H2": 8
+        },
+        "T2": {
+          "H1": 0,
+          "H2": 0
+        },
+        "T3": {
+          "H1": 8,
+          "H2": 8
+        }
+      },
+      "all_six_correct": true,
+      "correct_cells": 6,
+      "text": "```json\n{\"T1\": {\"H1\": \"0\", \"H2\": \"8\"}, \"T2\": {\"H1\": \"0\", \"H2\": \"0\"}, \"T3\": {\"H1\": \"8\", \"H2\": \"8\"}}\n```"
+    },
+    {
+      "world_id": "shipping-018",
+      "strict_valid": false,
+      "content_parseable": true,
+      "predictions": {
+        "T1": {
+          "H1": 0,
+          "H2": 0
+        },
+        "T2": {
+          "H1": 6,
+          "H2": 0
+        },
+        "T3": {
+          "H1": 6,
+          "H2": 6
+        }
+      },
+      "removed_fence": true,
+      "numeric_strings_converted": 0,
+      "content_valid": true,
+      "expected": {
+        "T1": {
+          "H1": 0,
+          "H2": 0
+        },
+        "T2": {
+          "H1": 6,
+          "H2": 0
+        },
+        "T3": {
+          "H1": 6,
+          "H2": 6
+        }
+      },
+      "all_six_correct": true,
+      "correct_cells": 6,
+      "text": "```json\n{\n  \"T1\": {\"H1\": 0, \"H2\": 0},\n  \"T2\": {\"H1\": 6, \"H2\": 0},\n  \"T3\": {\"H1\": 6, \"H2\": 6}\n}\n```"
+    },
+    {
+      "world_id": "shipping-019",
+      "strict_valid": false,
+      "content_parseable": true,
+      "predictions": {
+        "T1": {
+          "H1": 8.0,
+          "H2": 8.0
+        },
+        "T2": {
+          "H1": 8.0,
+          "H2": 0.0
+        },
+        "T3": {
+          "H1": 0.0,
+          "H2": 0.0
+        }
+      },
+      "removed_fence": true,
+      "numeric_strings_converted": 6,
+      "content_valid": true,
+      "expected": {
+        "T1": {
+          "H1": 8,
+          "H2": 8
+        },
+        "T2": {
+          "H1": 8,
+          "H2": 0
+        },
+        "T3": {
+          "H1": 0,
+          "H2": 0
+        }
+      },
+      "all_six_correct": true,
+      "correct_cells": 6,
+      "text": "```json\n{\n  \"T1\": {\"H1\": \"8\", \"H2\": \"8\"},\n  \"T2\": {\"H1\": \"8\", \"H2\": \"0\"},\n  \"T3\": {\"H1\": \"0\", \"H2\": \"0\"}\n}\n```"
+    },
+    {
+      "world_id": "shipping-020",
+      "strict_valid": false,
+      "content_parseable": true,
+      "predictions": {
+        "T1": {
+          "H1": 4.0,
+          "H2": 0.0
+        },
+        "T2": {
+          "H1": 4.0,
+          "H2": 4.0
+        },
+        "T3": {
+          "H1": 0.0,
+          "H2": 0.0
+        }
+      },
+      "removed_fence": true,
+      "numeric_strings_converted": 6,
+      "content_valid": true,
+      "expected": {
+        "T1": {
+          "H1": 4,
+          "H2": 0
+        },
+        "T2": {
+          "H1": 4,
+          "H2": 4
+        },
+        "T3": {
+          "H1": 0,
+          "H2": 0
+        }
+      },
+      "all_six_correct": true,
+      "correct_cells": 6,
+      "text": "```json\n{\n    \"T1\": {\"H1\": \"4\", \"H2\": \"0\"},\n    \"T2\": {\"H1\": \"4\", \"H2\": \"4\"},\n    \"T3\": {\"H1\": \"0\", \"H2\": \"0\"}\n}\n```"
+    },
+    {
+      "world_id": "shipping-021",
+      "strict_valid": false,
+      "content_parseable": true,
+      "predictions": {
+        "T1": {
+          "H1": 0.0,
+          "H2": 0.0
+        },
+        "T2": {
+          "H1": 4.0,
+          "H2": 4.0
+        },
+        "T3": {
+          "H1": 0.0,
+          "H2": 4.0
+        }
+      },
+      "removed_fence": true,
+      "numeric_strings_converted": 6,
+      "content_valid": true,
+      "expected": {
+        "T1": {
+          "H1": 0,
+          "H2": 0
+        },
+        "T2": {
+          "H1": 4,
+          "H2": 4
+        },
+        "T3": {
+          "H1": 0,
+          "H2": 4
+        }
+      },
+      "all_six_correct": true,
+      "correct_cells": 6,
+      "text": "```json\n{\n  \"T1\": {\"H1\": \"0\", \"H2\": \"0\"},\n  \"T2\": {\"H1\": \"4\", \"H2\": \"4\"},\n  \"T3\": {\"H1\": \"0\", \"H2\": \"4\"}\n}\n```"
+    },
+    {
+      "world_id": "shipping-022",
+      "strict_valid": false,
+      "content_parseable": true,
+      "predictions": {
+        "T1": {
+          "H1": 10.0,
+          "H2": 0.0
+        },
+        "T2": {
+          "H1": 0.0,
+          "H2": 0.0
+        },
+        "T3": {
+          "H1": 10.0,
+          "H2": 10.0
+        }
+      },
+      "removed_fence": true,
+      "numeric_strings_converted": 6,
+      "content_valid": true,
+      "expected": {
+        "T1": {
+          "H1": 10,
+          "H2": 0
+        },
+        "T2": {
+          "H1": 0,
+          "H2": 0
+        },
+        "T3": {
+          "H1": 10,
+          "H2": 10
+        }
+      },
+      "all_six_correct": true,
+      "correct_cells": 6,
+      "text": "```json\n{\n  \"T1\": {\"H1\": \"10\", \"H2\": \"0\"},\n  \"T2\": {\"H1\": \"0\", \"H2\": \"0\"},\n  \"T3\": {\"H1\": \"10\", \"H2\": \"10\"}\n}\n```"
+    },
+    {
+      "world_id": "shipping-023",
+      "strict_valid": false,
+      "content_parseable": true,
+      "predictions": {
+        "T1": {
+          "H1": 0.0,
+          "H2": 6.0
+        },
+        "T2": {
+          "H1": 0.0,
+          "H2": 0.0
+        },
+        "T3": {
+          "H1": 6.0,
+          "H2": 6.0
+        }
+      },
+      "removed_fence": true,
+      "numeric_strings_converted": 6,
+      "content_valid": true,
+      "expected": {
+        "T1": {
+          "H1": 0,
+          "H2": 6
+        },
+        "T2": {
+          "H1": 0,
+          "H2": 0
+        },
+        "T3": {
+          "H1": 6,
+          "H2": 6
+        }
+      },
+      "all_six_correct": true,
+      "correct_cells": 6,
+      "text": "```json\n{\n  \"T1\": {\"H1\": \"0\", \"H2\": \"6\"},\n  \"T2\": {\"H1\": \"0\", \"H2\": \"0\"},\n  \"T3\": {\"H1\": \"6\", \"H2\": \"6\"}\n}\n```"
+    }
+  ],
+  "note": "Supplementary content audit only. Original records, strict flags, and decision are unchanged. Original comparison fields retain their original strict competence subset."
+}

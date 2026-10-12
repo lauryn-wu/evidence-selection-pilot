@@ -1,0 +1,116 @@
+{
+  "protocol": "evidence-selection-supplied-predictions-v1",
+  "model": "gpt-4o-2024-08-06",
+  "plan_hash": "7820a170ba8d06dc2938a15f1cdbdbf681effbd06a8bc6c3abecbcbd2930cf51",
+  "is_simulated": false,
+  "cases": 24,
+  "task_families": 1,
+  "planned_calls": 72,
+  "attempts_total": 72,
+  "returned_answers": 72,
+  "invalid_answers": 0,
+  "unresolved_attempts": 0,
+  "initial_hypotheses": {
+    "labels": {
+      "H1": 12,
+      "H2": 12
+    },
+    "semantic_rules": {
+      "price": 24,
+      "weight": 0
+    }
+  },
+  "conditions": {
+    "rules_only": {
+      "planned": 24,
+      "returned": 24,
+      "valid": 24,
+      "invalid": 0,
+      "missing": 0,
+      "diagnostic_count": 4,
+      "diagnostic_rate_all_planned": 0.16666666666666666,
+      "diagnostic_rate_valid_only": 0.16666666666666666,
+      "mean_information_bits_valid_only": 0.16666666666666666,
+      "no_prefix_count": 24,
+      "has_prefix_count": 0,
+      "by_diagnostic_direction": {
+        "high_heavy": {
+          "correct": 3,
+          "planned": 12
+        },
+        "low_light": {
+          "correct": 1,
+          "planned": 12
+        }
+      }
+    },
+    "predictions_supplied": {
+      "planned": 24,
+      "returned": 24,
+      "valid": 24,
+      "invalid": 0,
+      "missing": 0,
+      "diagnostic_count": 24,
+      "diagnostic_rate_all_planned": 1.0,
+      "diagnostic_rate_valid_only": 1.0,
+      "mean_information_bits_valid_only": 1.0,
+      "no_prefix_count": 24,
+      "has_prefix_count": 0,
+      "by_diagnostic_direction": {
+        "high_heavy": {
+          "correct": 12,
+          "planned": 12
+        },
+        "low_light": {
+          "correct": 12,
+          "planned": 12
+        }
+      }
+    }
+  },
+  "primary_contrast": "predictions_supplied_minus_rules_only",
+  "comparison": {
+    "n_pairs": 24,
+    "difference_pp": 83.33333333333334,
+    "bootstrap_interval95_pp": [
+      66.66666666666666,
+      95.83333333333334
+    ],
+    "interval_note": "Descriptive case bootstrap; repeated cases share one task template.",
+    "gains": 20,
+    "losses": 0,
+    "mcnemar_exact_p_unadjusted": 1.9073486328125e-06,
+    "answer_only_subset": {
+      "n_pairs": 24,
+      "difference_pp": 83.33333333333334,
+      "bootstrap_interval95_pp": [
+        66.66666666666666,
+        95.83333333333334
+      ],
+      "interval_note": "Descriptive case bootstrap; repeated cases share one task template.",
+      "gains": 20,
+      "losses": 0,
+      "mcnemar_exact_p_unadjusted": 1.9073486328125e-06
+    }
+  },
+  "returned_response_token_usage": {
+    "prompt_tokens": 23952,
+    "completion_tokens": 408,
+    "total_tokens": 24360
+  },
+  "supplied_prediction_failures": [],
+  "notes": [
+    "Twenty-four paired numerical cases from one task family; broad generalization is untested.",
+    "The initial response is shared verbatim, but latent beliefs and confidence are not measured.",
+    "The table changes visibility, redundancy, and presentation; a benefit does not uniquely identify an internal bottleneck.",
+    "A supplied correct table does not prove the model read, trusted, or represented it correctly.",
+    "Answer-only output does not establish absence of internal reasoning.",
+    "Invalid and missing choices are not observed zero-information actions.",
+    "The primary comparison uses valid pairs; all-planned rates and missingness are also reported.",
+    "The answer-only subset and direction slices are secondary descriptive checks.",
+    "Bootstrap intervals are descriptive; the exact paired p-value is exploratory.",
+    "This study does not execute a test, sample a hidden rule, or measure final rule identification.",
+    "The decision labels are planning heuristics, not significance, mechanism, or novelty verdicts."
+  ],
+  "decision": "supplied_predictions_near_ceiling_stop_shipping_task"
+}

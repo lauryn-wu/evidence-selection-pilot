@@ -1,196 +1,74 @@
-# Evidence selection pilot
+# Evidence selection in language models
 
-Does the way a language model reasons before choosing a test change how informative
-that test is?
+Does the way a language model reasons before choosing a test change how informative that test is?
 
-This is a small, standalone behavioral pilot. It compares four response
-instructions after the model has stated the same tentative hypothesis. It includes
-an exact scoring oracle, a separate rule-prediction check, frozen prompts,
-resumable requests, raw responses, and paired analysis.
+**Status: two small experiments completed; the shipping task is closed.** In the first experiment, comparing possible test outcomes improved selection relative to summarizing the facts. In the follow-up, supplying the correct outcomes in a table increased informative choices from **4/24 to 24/24**. The proposed reasoning-harm effect did not appear.
 
-**Status: the first pilot is complete.** Informative choices were 7/24 direct,
-8/24 after a factual summary, 20/24 after deliberation, and 11/24 after explaining
-the initial hypothesis. This does not support the proposed reasoning-harm effect.
-See the [audited results](docs/SHIPPING_001_AUDIT.md), including the separate
-competence content score and the original parser's formatting failures.
+This repository contains the experiment code, frozen protocols, exact scoring rules, raw model responses, and offline analyses. Both experiments used `gpt-4o-2024-08-06` at temperature 0. Each used 24 paired numerical variants of one task family.
 
-## Current follow-up: supplied predictions
+## Task
 
-The new `evidence_selection_predictions` package compares **rules only** with
-**the same rules plus a correct table of each test's outcome under each hypothesis**.
-Both conditions request only the chosen test and share an identical saved initial
-guess. The table does not mark the informative test. The original package and
-completed run remain unchanged.
+A shipping calculator follows one of two rules: free shipping depends on either order price or order weight. Two observed orders fit both rules. The model states a tentative hypothesis, then chooses one of three new orders to test. Exactly one test distinguishes the rules; the other two produce the same fee under both rules.
 
-This is a bounded diagnostic with **24 fresh paired cases, 72 planned calls, and
-an 84-attempt cap**. No live results for this follow-up are included. If the supplied
-table produces near-perfect selection, stop expanding the shipping task. Remaining
-errors require an audit, not automatic expansion or a mechanism claim.
+Each condition receives the same saved initial response for that case. The score is whether the chosen test distinguishes the rules. The experiments do not execute the selected test or measure later belief revision. See the [worked example](docs/EXAMPLE.md).
 
-Start with the six-call check (two cases), using your terminal's OPENAI_API_KEY:
+## Experiment 1: instructions before selection
 
-~~~bash
-python3 -m unittest discover -s tests -v
-python3 -m evidence_selection_predictions prepare --config configs/predictions.json --output runs/predictions-001
-caffeinate -i python3 -m evidence_selection_predictions run --output runs/predictions-001 --max-calls 6
-python3 -m evidence_selection_predictions export --output runs/predictions-001 --destination runs/predictions-check-001.zip
-~~~
+All 144 planned calls returned: 24 initial hypotheses, 96 selections, and 24 separate checks of predicted shipping fees. All 96 selections were parseable.
 
-After checking the responses, resume without --max-calls and export to a different
-filename. See the [follow-up protocol and full commands](docs/PREDICTIONS_PROTOCOL.md).
-Neither prepare nor export makes model calls. Mock and live runs use separate
-directories. Do not edit source or prompts during collection.
+| Instruction | Informative choices | Rate |
+| --- | ---: | ---: |
+| Choose directly | 7/24 | 29.2% |
+| Summarize the facts | 8/24 | 33.3% |
+| Compare hypotheses and possible test outcomes | 20/24 | 83.3% |
+| Explain the initial hypothesis | 11/24 | 45.8% |
 
-## Original four-condition experiment
+The primary comparison, deliberation minus factual summary, was **+50 percentage points**: 13 paired gains and one loss. Its descriptive 95% paired bootstrap interval was [25.0, 70.8] points. Explaining the initial hypothesis performed worse than prospective comparison, but numerically better than the direct and factual-summary conditions. These results do not establish harm from explanation or reasoning.
 
-A shipping calculator follows exactly one of two possible rules:
+**Scoring audit:** the original parser rejected all 24 competence responses because of formatting. A separately declared, uniform content audit found 23/24 cases with all six fees correct, or 143/144 fee predictions. Original responses, validity flags, and the `measurement_issue_review_invalid_outputs` decision remain unchanged. The content audit does not retroactively pass the original screen. See the [full audit](docs/SHIPPING_001_AUDIT.md) and [machine-readable content scores](results/shipping-001-content-audit.json).
 
-- Free shipping depends on order price.
-- Free shipping depends on order weight.
+## Experiment 2: supplied predictions
 
-Two initial observations fit both rules. The model states a tentative hypothesis
-before seeing the candidate tests. Four independent continuations use that exact
-same saved response:
+The follow-up used 24 fresh paired cases and 72 calls. Both conditions requested only the chosen test. One received the rules alone; the other also received a correct table of every candidate's outcome under each rule. The table did not label the informative test. All 72 responses were valid.
 
-| Condition | Instruction before selecting a test |
-| --- | --- |
-| direct | Select a test with no written explanation. |
-| facts | Summarize the supplied information in 60-100 words, then select. |
-| deliberate | Reason about the competing hypotheses and what the tests reveal in 60-100 words, then select. |
-| explain | Explain the reasoning behind the tentative hypothesis in 60-100 words, allowing uncertainty and revision, then select. |
+| Condition | Informative choices | Rate |
+| --- | ---: | ---: |
+| Rules only | 4/24 | 16.7% |
+| Rules plus supplied predictions | 24/24 | 100% |
 
-All conditions receive the same objective: choose the test most useful for
-distinguishing the rules. One test perfectly distinguishes them; the other two
-give the same outcome under either rule. The primary outcome is the fraction of
-diagnostic tests selected. Under the stated equal prior, a diagnostic test gives
-one bit of information and either other test gives zero.
+The paired difference was **+83.3 percentage points**, with 20 gains and no losses; the descriptive 95% paired bootstrap interval was [66.7, 95.8] points. The prespecified decision was `supplied_predictions_near_ceiling_stop_shipping_task`.
 
-A separate, fresh conversation asks the model to predict each candidate's outcome
-under each rule. This checks whether it can calculate the consequences of the
-tests without feeding that calculation into any selection condition.
+Correct supplied predictions were sufficient for perfect selection on these cases. Because the table also changes presentation and makes the comparison easier, this does not identify a unique internal bottleneck. See the [follow-up audit](docs/PREDICTIONS_001_AUDIT.md), [analysis](results/predictions-001-analysis.json), and [protocol](docs/PREDICTIONS_PROTOCOL.md).
 
-The default pilot has **24 paired cases and 144 planned API calls**:
-24 initial hypotheses, 96 selections, and 24 competence checks. The hard limit is
-168 attempts, including transport retries and uncertain in-flight requests.
-The cases vary thresholds, fees, numerical inputs, hypothesis labels, candidate
-order, and condition call order. They are variants of one task family.
+## Scope and stopping decision
 
-See [the worked example](docs/EXAMPLE.md), [protocol](docs/PROTOCOL.md), and
-[literature context](docs/LITERATURE.md).
+- These are two small experiments on one model and one task family. The paired cases are the units of analysis; individual responses are not independent replications.
+- The initial guess favored the price rule in all 24 cases of each experiment, despite balanced hypothesis labels.
+- Some factual summaries included test-selection reasoning, and requested explanation lengths did not produce equal realized lengths. The first experiment does not isolate an internal reasoning mechanism.
+- Supplying outcomes combines precomputation, visibility, redundancy, and presentation. Answer-only output does not establish an absence of internal reasoning.
 
-## Run on your Mac
+The original harmful-reasoning hypothesis was unsupported, and the follow-up reached ceiling with supplied predictions. Further expansion of this shipping task is not planned. The results are a bounded behavioral finding, with no claim of broad generalization or a new mechanism.
 
-Requires Python 3.10 or newer. There are no runtime dependencies to install.
-Run the commands from this project folder. Linux is also supported; the process
-lock uses fcntl, so Windows requires WSL.
+## Reproduce the saved analyses offline
 
-First, verify the code and freeze the experiment. Neither command contacts a model.
+Requires Python 3.10+ on macOS or Linux, with no third-party runtime dependencies. Run from the repository root. These commands make no model calls:
 
-~~~bash
-python3 -m unittest discover -s tests -v
-python3 -m evidence_selection prepare --config configs/pilot.json --output runs/shipping-001
-~~~
+```bash
+python3 -m evidence_selection_predictions audit-original \
+  --input results/shipping-001.zip \
+  --output runs/reproduce-shipping-audit
 
-Inspect runs/shipping-001/prompts.md if you want to see every prepared prompt.
-The saved initial answer is inserted only after its real response arrives.
+python3 -m zipfile -e results/predictions-001.zip runs/reproduce-predictions
+python3 -m evidence_selection_predictions analyze \
+  --output runs/reproduce-predictions/predictions-001
+```
 
-The live runner uses OPENAI_API_KEY from your terminal environment. It does not
-read a .env file automatically. If your key is already exported, no setup change
-is needed. The default model is gpt-4o-2024-08-06.
+Use fresh output directories so existing analyses remain intact. Both ZIP files contain the original prompts, requests, responses, plans, and reports. Archive checksums and contents are listed in [results/README.md](results/README.md).
 
-Start with six calls: the initial hypothesis, all four conditions, and the isolated
-competence check for one case.
+## Documentation
 
-~~~bash
-caffeinate -i python3 -m evidence_selection run --output runs/shipping-001 --max-calls 6
-~~~
+- [Original protocol](docs/PROTOCOL.md) and [supplied-predictions protocol](docs/PREDICTIONS_PROTOCOL.md)
+- [Literature context](docs/LITERATURE.md)
+- [Run instructions, offline simulations, and request handling](docs/RUNNING.md)
 
-After inspecting those responses, resume the same run:
-
-~~~bash
-caffeinate -i python3 -m evidence_selection run --output runs/shipping-001
-~~~
-
-Completed and invalid responses are never requested again. The smoke check is part
-of the frozen 24-case pilot, not a separate experiment. On Linux, omit caffeinate -i.
-Do not change prompts, code, or config midway through a run.
-
-Analyze or package the results:
-
-~~~bash
-python3 -m evidence_selection analyze --output runs/shipping-001
-python3 -m evidence_selection export --output runs/shipping-001 --destination runs/shipping-001.zip
-~~~
-
-Upload the resulting ZIP for review. It contains raw responses and exact requests,
-not just a summary.
-
-## Offline demonstration
-
-This uses a deterministic oracle simulator and makes **zero API calls**:
-
-~~~bash
-python3 -m evidence_selection run --config configs/pilot.json --output runs/mock-001 --mock
-~~~
-
-Mock and live responses cannot share a run directory. Mock reports are prominently
-labeled and never pass a scientific decision gate.
-
-## What to read after a run
-
-- report.md: readable results and the pilot decision.
-- analysis.json: condition counts, missingness, paired comparisons, uncertainty
-  summaries, competence performance, and returned-response token usage.
-- audit.csv: one row per case and condition, including the full selection response.
-- attempts/*.json: every request, raw response, parsing result, timestamps, model,
-  token usage, and transport failure.
-- plan.json and prompts.md: the frozen cases, schedule, oracle, and instructions.
-
-The main contrast is deliberate minus facts. Deliberate minus direct is a
-secondary check; explain minus facts and explain minus deliberate help distinguish
-justification-specific behavior. Negative differences mean less informative
-selection in the first condition.
-
-Decision thresholds are specified in the protocol. They are conservative planning
-rules for whether to invest in a fresh replication, not significance or novelty
-claims. If performance is at ceiling, stop this task rather than repeatedly
-changing wording until an effect appears.
-
-## Interrupted or failed requests
-
-Ordinary HTTP rate limits/server errors receive bounded retries. Refusals,
-truncated responses, malformed outputs, and incorrect selections are retained.
-They are never retried to obtain a better answer.
-
-An interruption or network timeout may leave an uncertain attempt that was
-already processed by the provider. It counts against the attempt budget. Review
-that attempt before explicitly allowing another request:
-
-~~~bash
-caffeinate -i python3 -m evidence_selection run --output runs/shipping-001 --retry-uncertain
-~~~
-
-Invalid initial hypotheses block that case's four selection branches, while its
-competence check can still run. The report shows the missing branches. Investigate
-the format failure; do not silently replace that case or delete an attempt.
-
-The attempt cap limits request count, not dollar spending. Token totals include
-returned responses only; a timed-out request may still have been billed.
-
-## Create the separate GitHub repository
-
-The download is a complete source project. Create an **empty private repository**
-named evidence-selection-pilot on GitHub, without an automatically generated
-README, then run these commands from this folder:
-
-~~~bash
-git init
-git add .
-git commit -m "Initialize evidence selection pilot"
-git branch -M main
-git remote add origin https://github.com/lauryn-wu/evidence-selection-pilot.git
-git push -u origin main
-~~~
-
-Run outputs and API-key files are excluded by .gitignore. The project contains
-no dependency on another research repository.
+Live API execution is optional and incurs cost. It is not required to inspect or reproduce the archived analyses.

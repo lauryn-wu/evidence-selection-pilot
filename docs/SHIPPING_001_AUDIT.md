@@ -92,7 +92,7 @@ All raw requests, saved parses, provider completion status, source identity, and
 the frozen plan were verified. The original six smoke responses were unchanged
 in the completed export. No source or raw run data was edited during the audit.
 
-- Archive: shipping-001.zip, SHA-256
+- [Original archive](../results/shipping-001.zip), SHA-256
   `6be41a130b998b73352708cec45d475db5543c9787e7124a38dc8c308852d48d`.
 - Plan hash:
   `383bd6d3b8d6fb6154544469c07f9f7989745fb348fc58e03bcca347051e1b97`.
@@ -102,14 +102,15 @@ in the completed export. No source or raw run data was edited during the audit.
 The [machine-readable content audit](../results/shipping-001-content-audit.json)
 includes the scoring policy, every competence response, expected and interpreted
 fees, unchanged strict scores, selection counts, and original paired comparisons.
-The full original export remains the source for all 144 requests and responses.
-With that export or its run directory, reproduce the separate audit using:
+The full original export is included and remains the source for all 144 requests
+and responses. From the repository root, reproduce the separate audit using:
 
 ~~~bash
-python3 -m evidence_selection_predictions audit-original --input runs/shipping-001 --output runs/shipping-content-audit-001
+python3 -m evidence_selection_predictions audit-original --input results/shipping-001.zip --output runs/shipping-content-audit-001
 ~~~
 
 This command makes no API calls and refuses to overwrite the original run or an
-existing audit. The [follow-up](PREDICTIONS_PROTOCOL.md) uses fresh cases to test
-whether supplied correct predictions improve selection. It is not an expansion
-of the original reasoning-harm claim or a claim of publication-level novelty.
+existing audit. The [completed follow-up](PREDICTIONS_001_AUDIT.md) used fresh cases
+to test whether supplied correct predictions improve selection. It reached 24/24
+with the table versus 4/24 with rules only, meeting its stopping rule. It is not
+an expansion of the original reasoning-harm claim or a claim of publication-level novelty.
